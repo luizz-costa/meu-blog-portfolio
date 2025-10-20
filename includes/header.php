@@ -34,7 +34,7 @@
     <header class="py-6 relative">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="flex justify-between items-center"><a href="<?= $basePath ?>index.php" class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-300">Luiz Felipe</a><button id=mobile-menu-button class="md:hidden text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24">
+                <div class="flex justify-between items-center"><a href="<?= $basePath ?>" class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-300">Luiz Felipe</a><button id=mobile-menu-button class="md:hidden text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg></button></div>
                 <nav class="hidden md:flex flex-wrap justify-center items-center gap-4 md:gap-6">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <nav class="flex flex-col p-6 space-y-4">
-                        <a href="<?= $basePath ?>index.php" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300" data-menu-link>Início</a>
+                        <a href="<?= $basePath ?>" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300" data-menu-link>Início</a>
                         <a href="<?= $basePath ?>about.php" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300" data-menu-link>Sobre</a>
                         <a href="<?= $basePath ?>experience.php" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300" data-menu-link>Experiência</a>
                         <a href="<?= $basePath ?>projects.php" class="text-xl text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-300" data-menu-link>Projetos</a>
