@@ -27,9 +27,9 @@ Este projeto demonstra habilidades em PHP, JavaScript e MySQL, aplicando conceit
 
 ## ⚙️ Funcionalidades
 
-- ✅ Publicar, editar e excluir posts via painel administrativo;  
-- ✅ Gerenciar conteúdo armazenado em banco de dados MySQL; 
-- ✅ Navegar pelos posts no frontend de forma organizada; 
+- ✅ Publicar, editar e excluir posts via painel administrativo.  
+- ✅ Gerenciar conteúdo armazenado em banco de dados MySQL. 
+- ✅ Navegar pelos posts no frontend de forma organizada. 
 - ✅ Layout moderno e personalizável.  
 - ✅ Modo escuro e Modo claro.  
 - ✅ Interface limpa e responsiva  
@@ -51,11 +51,10 @@ meu-blog-portfolio/
 │   │        └── logout.php
 │   └─ pages/
 │   │   └─ blog/ 
-│   │   │   └── auth.php
-│   │   │   └── config.php
-│   │   │   └── footer.php
-│   │   │   └── header.php
-│   │   │   └── logout.php
+│   │   │   └── cadastrar_post.php
+│   │   │   └── deletar_post.php
+│   │   │   └── editar_post.php
+│   │   │   └── lista_post.php
 │   │   └─ contato/ 
 │   │   │   └── cadastrar_contato.php
 │   │   │   └── editar_contato.php
@@ -139,7 +138,7 @@ git clone https://github.com/luizz-costa/meu-blog-portfolio.git
 > Outros SGBDs (como PostgreSQL) podem precisar de ajustes no script SQL em /includes e na conexão com banco de dados.
 
 1. Crie um banco de dados no MySQL e de um nome Ex: `portfolio_blog`.
-2. Clique em **Importar** e selecione o arquivo `script.sql` em /includes.
+2. Clique em **Importar** e selecione o arquivo `script.sql` na pasta /includes.
 3. Clique em **Executar ou Importar**.
 
 #### 5. Terminal MySQL
@@ -156,7 +155,7 @@ mysql -u USUARIO -p NOME_DO_BANCO < caminho/para/script.sql
    - `$pass` → senha do usuário
    - `$db`   → nome do banco de dados Ex: `portfolio_blog`
 
-3. Os includes ja estão sendo feitos nas paginas com require_once('includes/conexao.php');
+3. Os includes ja estão sendo feitos nas paginas com `require_once('includes/conexao.php');`
 4. Salve e rode o projeto localmente (XAMP, etc).
 5. Abra no navegador `http://localhost/meu-blog-portfolio`
 
@@ -208,4 +207,5 @@ Sinta-se livre para usar, modificar e compartilhar.
 ---
 
 
-Layout baseado no tema [Hugo Noir](https://themes.gohugo.io/themes/hugo-noir/) de [Pranam Shetty](https://github.com/prxshetty), licenciado sob MIT. Backend em PHP/MySQL desenvolvido por Luiz Felipe.
+Layout baseado no tema [Hugo Noir](https://themes.gohugo.io/themes/hugo-noir/) de [Pranam Shetty](https://github.com/prxshetty), licenciado sob MIT. 
+Backend em PHP/MySQL e ajustes no layout desenvolvido por Luiz Felipe.

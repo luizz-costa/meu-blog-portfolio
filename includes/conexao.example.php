@@ -2,7 +2,7 @@
 $host = 'localhost';
 $user = 'usuario';
 $password = 'senha';
-$db = 'meu_banco';
+$database = 'meu_banco';
 
 
 
