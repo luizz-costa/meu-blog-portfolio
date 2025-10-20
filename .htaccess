@@ -1,0 +1,12 @@
+# Ativar reescrita de URL
+RewriteEngine On
+
+# Garantir que o arquivo base é o diretório atual
+RewriteBase /
+
+# Redirecionar URLs do tipo /blog/slug-do-post
+RewriteRule ^blog/([^/]+)/?$ blog_post/post.php?slug=$1 [L,QSA]
+
+# Desativa a listagem de diretórios para todas as pastas
+Options -Indexes
+

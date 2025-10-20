@@ -1,0 +1,3 @@
+# Arquivos sensíveis
+includes/conexao.php
+.env
