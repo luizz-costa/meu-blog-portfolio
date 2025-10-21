@@ -6,10 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luiz Felipe - Portfólio</title>
+    <title>Luiz F. Costa</title>
 
     <!-- Favicons -->
-    
+    <link rel="icon" type="image/png" href="<?= $basePath ?>favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="<?= $basePath ?>favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/meu-blog-portfolio/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= $basePath ?>favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Luiz F. Costa" />
+    <link rel="manifest" href="<?= $basePath ?>favicon/site.webmanifest" />
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +39,7 @@
     <header class="py-6 relative">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="flex justify-between items-center"><a href="<?= $basePath ?>" class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-300">Luiz Felipe</a><button id=mobile-menu-button class="md:hidden text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24">
+                <div class="flex justify-between items-center"><a href="<?= $basePath ?>" class="text-xl font-bold text-text-primary-light dark:text-text-primary-dark hover:text-accent-light dark:hover:text-accent-dark transition-colors duration-300">Luiz F. Costa</a><button id=mobile-menu-button class="md:hidden text-text-secondary-light dark:text-text-secondary-dark hover:text-text-primary-light dark:hover:text-text-primary-dark focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentcolor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg></button></div>
                 <nav class="hidden md:flex flex-wrap justify-center items-center gap-4 md:gap-6">

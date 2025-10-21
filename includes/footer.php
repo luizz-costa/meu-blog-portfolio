@@ -14,7 +14,7 @@
           </a>
         </p>
         <p class="text-text-secondary-light dark:text-text-primary-dark text-xm pb-9">
-          © 2025 Luiz Felipe
+          © 2025 Luiz F. Felipe
         </p>
       </div>
     </div>
