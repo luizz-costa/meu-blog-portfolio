@@ -207,5 +207,6 @@ Sinta-se livre para usar, modificar e compartilhar.
 ---
 
 
-Layout baseado no tema [Hugo Noir](https://themes.gohugo.io/themes/hugo-noir/) de [Pranam Shetty](https://github.com/prxshetty), licenciado sob MIT. 
+Layout baseado no tema [Hugo Noir](https://themes.gohugo.io/themes/hugo-noir/) de [Pranam Shetty](https://github.com/prxshetty), licenciado sob MIT.  
+
 Backend em PHP/MySQL e ajustes no layout desenvolvido por Luiz Felipe.
