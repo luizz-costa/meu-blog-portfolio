@@ -1,4 +1,4 @@
-# 🚀 Meu portfolio-blog em PHP e MySQL
+# Meu portfolio-blog em PHP e MySQL
 
 ![PHP](https://img.shields.io/badge/PHP-8.2-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -13,7 +13,7 @@ Este projeto demonstra habilidades em PHP, JavaScript e MySQL, aplicando conceit
 
 ----
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **PHP 8.2**
 - **MySQL**
@@ -25,7 +25,7 @@ Este projeto demonstra habilidades em PHP, JavaScript e MySQL, aplicando conceit
 
 ---
 
-## ⚙️ Funcionalidades
+## Funcionalidades
 
 - ✅ Publicar, editar e excluir posts via painel administrativo.  
 - ✅ Gerenciar conteúdo armazenado em banco de dados MySQL. 
@@ -36,7 +36,7 @@ Este projeto demonstra habilidades em PHP, JavaScript e MySQL, aplicando conceit
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 meu-blog-portfolio/
@@ -110,7 +110,7 @@ meu-blog-portfolio/
 └── README.md
 ```
 
-## 🧩 Como Usar o Projeto:
+## Como Usar o Projeto:
 
 ### Pré requisitos
 - **PHP 8+** 
@@ -161,7 +161,7 @@ mysql -u USUARIO -p NOME_DO_BANCO < caminho/para/script.sql
 
 ---
 
-## 🔹Endpoints
+## Endpoints
 
 ### Blog
 
@@ -178,7 +178,7 @@ mysql -u USUARIO -p NOME_DO_BANCO < caminho/para/script.sql
   Parâmetros: Nenhum
 
 ---
-## 📷 Preview
+## Preview
 
 #### Index em modo Dark
 ![Interface do Portfolio-Blog](images/indexabout.png)
@@ -188,7 +188,7 @@ mysql -u USUARIO -p NOME_DO_BANCO < caminho/para/script.sql
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto está sob a licença MIT.
 Sinta-se livre para usar, modificar e compartilhar.
@@ -196,10 +196,10 @@ Sinta-se livre para usar, modificar e compartilhar.
 ---
 
 
-## ⚡ Contato
+## Contato
 
-> 👨‍💻 **Desenvolvido por [Luiz F. Costa](https://luizzcosta.site)**  
-> 🌐 Portfólio: [luizzcosta.site](https://luizzcosta.site)  
+> 👨‍💻 **Desenvolvido por [Luiz F. Costa](https://luizz-costa.github.io/)**  
+> 🌐 Portfólio: [luizz-costa.github.io](https://luizz-costa.github.io/)  
 > 💻 GitHub: [github.com/luizz-costa](https://github.com/luizz-costa)  
 > 💼 LinkedIn: [linkedin.com/in/luizz-costa](https://linkedin.com/in/luizz-costa)  
 > 📧 Email: [luizcostavzp@gmail.com](mailto:luizcostavzp@gmail.com)
