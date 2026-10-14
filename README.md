@@ -112,7 +112,7 @@ O site funciona tanto numa subpasta (como no XAMPP) quanto na raiz de um domíni
 ## Site público
 
 ![Página inicial do site, montada com o conteúdo do banco](images/site-publico.png)
-![Página inicial do site, montada com o conteúdo do banco](images/site-publico-experiencias.png)
+![Página de experiências do site, montada com o conteúdo do banco](images/site-publico-experiencias.png)
 
 ## Créditos e licença
 
