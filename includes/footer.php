@@ -1,6 +1,6 @@
 </main>
 
-<?php $basePath = '/'; ?>
+<?php require_once __DIR__ . '/caminhos.php'; $basePath = BASE_URL; ?>
 
 <footer class="mt-32 text-center">
   <div class="max-w-3xl mx-auto">

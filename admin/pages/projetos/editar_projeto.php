@@ -1,12 +1,17 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 require_once('../../../includes/conexao.php');
 require_once('../../../includes/upload.php');
 
 $id = intval($_GET['id']);
-$sql_project = "SELECT * FROM projects WHERE id = '$id'";
-$query_project = $mysqli->query($sql_project) or die($mysqli->error);
-$project = $query_project->fetch_assoc();
+$stmt = $mysqli->prepare("SELECT * FROM projects WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$project = $stmt->get_result()->fetch_assoc();
 
 if (count($_POST) > 0) {
 
@@ -46,20 +51,17 @@ if (count($_POST) > 0) {
   if ($erro) {
     echo "<p><b>ERROR: $erro</b></p>";
   } else {
-    $sql_code = "UPDATE projects SET 
-        title = '$title', 
-        technologies = '$technologies', 
-        link_project = '$link_project', 
-        description = '$description', 
-        image = '$image' 
-        WHERE id = '$id'";
-
-    $ok = $mysqli->query($sql_code) or die($mysqli->error);
+    $stmt = $mysqli->prepare("UPDATE projects SET
+        title = ?, technologies = ?, link_project = ?, description = ?, image = ?
+        WHERE id = ?");
+    $stmt->bind_param("sssssi", $title, $technologies, $link_project, $description, $image, $id);
+    $ok = $stmt->execute() or die($stmt->error);
 
     if ($ok) {
       echo "<p><b>Projeto Atualizado!!!</b></p>";
       unset($_POST);
       header("Location: lista_projetos.php");
+      exit;
 
     }
   }

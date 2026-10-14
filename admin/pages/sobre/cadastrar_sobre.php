@@ -1,5 +1,9 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 if (count($_POST) > 0) {
 
   require_once('../../../includes/conexao.php');
@@ -33,9 +37,9 @@ if (count($_POST) > 0) {
   if ($erro) {
     echo "<p><b>ERROR: $erro</b></p>";
   } else {
-    $sql_code = "INSERT INTO about (name, short_description, long_description, image)
-        VALUES ('$name', '$short_description', '$long_description', '$image')";
-    $ok = $mysqli->query($sql_code) or die($mysqli->error);
+    $stmt = $mysqli->prepare("INSERT INTO about (name, short_description, long_description, image) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $name, $short_description, $long_description, $image);
+    $ok = $stmt->execute() or die($stmt->error);
     if ($ok) {
       echo "<p><b>Enviado!!!</b></p>";
       unset($_POST);
@@ -56,13 +60,13 @@ if (count($_POST) > 0) {
     <a href="editar_sobre.php">Voltar para o Editar</a>
     <form class="form-card" method="POST" action="">
       <label>Nome
-        <input value="<?php if (isset($_POST['name'])) echo $_POST['name']; ?>" name="name" type="text" placeholder="Nome">
+        <input value="<?php if (isset($_POST['name'])) echo e($_POST['name']); ?>" name="name" type="text" placeholder="Nome">
       </label>
       <label>Descrição curta
-        <input value="<?php if (isset($_POST['short_description'])) echo $_POST['short_description']; ?>" name="short_description" type="text" placeholder="Descrição curta">
+        <input value="<?php if (isset($_POST['short_description'])) echo e($_POST['short_description']); ?>" name="short_description" type="text" placeholder="Descrição curta">
       </label>
       <label>Descrição longa
-        <textarea rows="6" value="<?php if (isset($_POST['long_description'])) echo $_POST['long_description']; ?>" name="long_description" placeholder="Aqui vai uma descrição longa sobre você."></textarea>
+        <textarea rows="6" name="long_description" placeholder="Aqui vai uma descrição longa sobre você."><?php if (isset($_POST['long_description'])) echo e($_POST['long_description']); ?></textarea>
       </label>
       <label>Minha foto (opcional)
         <input value="" name="image" type="file">

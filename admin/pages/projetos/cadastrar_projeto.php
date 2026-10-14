@@ -1,5 +1,9 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 if (count($_POST) > 0) {
 
   require_once('../../../includes/conexao.php');
@@ -32,9 +36,10 @@ if (count($_POST) > 0) {
   if ($erro) {
     echo "<p><b>ERROR: $erro</b></p>";
   } else {
-    $sql_code = "INSERT INTO projects (title, technologies, link_project, description, image)
-        VALUES ('$title', '$technologies', '$link_project', '$description', '$image')";
-    $ok = $mysqli->query($sql_code) or die($mysqli->error);
+    $stmt = $mysqli->prepare("INSERT INTO projects (title, technologies, link_project, description, image)
+        VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $title, $technologies, $link_project, $description, $image);
+    $ok = $stmt->execute() or die($stmt->error);
     if ($ok) {
       echo "<p><b>Projeto Cadastrado!!!</b></p>";
       unset($_POST);

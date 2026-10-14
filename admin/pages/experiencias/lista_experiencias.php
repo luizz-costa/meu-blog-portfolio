@@ -1,5 +1,9 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 require_once('../../../includes/conexao.php');
 
 //Consulta Experience
@@ -44,17 +48,17 @@ $num_experience = $query_experience->num_rows;
 
           ?>
             <tr>
-              <td><?php echo $experience['id'];?></td>
-              <td><?php echo $experience['company'];?></td>
-              <td><?php echo $experience['position'];?></td>
-              <td><?php echo $experience['period'];?></td>
-              <td><?php echo $experience['locality'];?></td>
-              <td><?php echo $experience['description'];?></td>
-              <td><?php echo $experience['long_description'];?></td>
-              <td><?php echo $experience['created_at'];?></td>
+              <td><?php echo e($experience['id']); ?></td>
+              <td><?php echo e($experience['company']); ?></td>
+              <td><?php echo e($experience['position']); ?></td>
+              <td><?php echo e($experience['period']); ?></td>
+              <td><?php echo e($experience['locality']); ?></td>
+              <td><?php echo e($experience['description']); ?></td>
+              <td><?php echo e($experience['long_description']); ?></td>
+              <td><?php echo e($experience['created_at']); ?></td>
               <td>
-                <a href="editar_experience.php?id=<?php echo $experience['id'];?>" class="btn small">Editar</a>
-                <a href="deletar_experience.php?id=<?php echo $experience['id'];?>" class="btn small ghost">Excluir</a>
+                <a href="editar_experience.php?id=<?php echo e($experience['id']); ?>" class="btn small">Editar</a>
+                <a href="deletar_experience.php?id=<?php echo e($experience['id']); ?>" class="btn small ghost">Excluir</a>
               </td>
             </tr>
         <?php

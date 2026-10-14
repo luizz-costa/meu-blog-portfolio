@@ -6,10 +6,11 @@ $sql_about = "SELECT * FROM about LIMIT 1";
 $query_about = $mysqli->query($sql_about) or die($mysqli->error);
 $about = $query_about->fetch_assoc();
 
-// // Consulta Certificações (dinâmico)
-// $sql_certifications = "SELECT * FROM certifications ORDER BY id DESC";
-// $query_certifications = $mysqli->query($sql_certifications) or die($mysqli->error);
-// 
+// Certificações: a tabela e o cadastro no painel ainda não existem.
+// Enquanto isso, a seção mostra "Nenhuma certificação cadastrada ainda."
+$query_certifications = null;
+// Quando criar a tabela, troque a linha acima por:
+// $query_certifications = $mysqli->query("SELECT * FROM certifications ORDER BY id DESC") or die($mysqli->error);
 ?>
 
 

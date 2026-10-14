@@ -1,5 +1,9 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 if (count($_POST) > 0) {
 
   require_once('../../../includes/conexao.php');
@@ -38,9 +42,11 @@ if (count($_POST) > 0) {
   if ($erro) {
     echo "<p><b>ERROR: $erro</b></p>";
   } else {
-    $sql_code = "INSERT INTO blog (title, link_post, technologies, short_description, long_description, image)
-        VALUES ('$title', '$link_post', '$technologies', '$short_description', '$long_description', '$image')";
-    $ok = $mysqli->query($sql_code) or die($mysqli->error);
+    // Consulta parametrizada: os dados vão separados do SQL, então não viram comando
+    $stmt = $mysqli->prepare("INSERT INTO blog (title, link_post, technologies, short_description, long_description, image)
+        VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $title, $link_post, $technologies, $short_description, $long_description, $image);
+    $ok = $stmt->execute() or die($stmt->error);
     if ($ok) {
       echo "<p><b>Post Cadastrado!!!</b></p>";
       unset($_POST);
@@ -60,19 +66,19 @@ if (count($_POST) > 0) {
 
     <form enctype="multipart/form-data" class="form-card" method="POST" action="">
       <label>Titulo:
-        <input value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>" name="title" type="text" placeholder="Ex: Pare de criptografar senhas com md5">
+        <input value="<?php if (isset($_POST['title'])) echo e($_POST['title']); ?>" name="title" type="text" placeholder="Ex: Pare de criptografar senhas com md5">
       </label>
       <label>Link ou nome da url:
-        <input value="<?php if (isset($_POST['link_post'])) echo $_POST['link_post']; ?>" name="link_post" type="text" placeholder="Ex:nao-use-metodo-md5">
+        <input value="<?php if (isset($_POST['link_post'])) echo e($_POST['link_post']); ?>" name="link_post" type="text" placeholder="Ex:nao-use-metodo-md5">
       </label>
       <label>Tecnologias usadas:
-        <input value="<?php if (isset($_POST['technologies'])) echo $_POST['technologies']; ?>" name="technologies" type="text" placeholder="Ex: Seguranca, Criptografia, md5..">
+        <input value="<?php if (isset($_POST['technologies'])) echo e($_POST['technologies']); ?>" name="technologies" type="text" placeholder="Ex: Seguranca, Criptografia, md5..">
       </label>
       <label>Descrição curta:
-        <input value="<?php if (isset($_POST['short_description'])) echo $_POST['short_description']; ?>" name="short_description" type="text" placeholder="Ex: O metodo md5 passou a ser um metodo pessimo para criptografar senhas.....">
+        <input value="<?php if (isset($_POST['short_description'])) echo e($_POST['short_description']); ?>" name="short_description" type="text" placeholder="Ex: O metodo md5 passou a ser um metodo pessimo para criptografar senhas.....">
       </label>
       <label>Descrição longa(conteudo):
-        <textarea rows="6" name="long_description" placeholder="Ex: Diversos hackers descriptografaram essas senhas e cadastraram em banco de dados....."><?php if (isset($_POST['long_description'])) echo $_POST['long_description']; ?></textarea>
+        <textarea rows="6" name="long_description" placeholder="Ex: Diversos hackers descriptografaram essas senhas e cadastraram em banco de dados....."><?php if (isset($_POST['long_description'])) echo e($_POST['long_description']); ?></textarea>
       </label>
       <label>Imagem do post
         <input name="image" type="file">

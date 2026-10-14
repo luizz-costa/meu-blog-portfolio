@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
 
 require_once('../../../includes/conexao.php');
 
@@ -42,16 +46,16 @@ $num_projects = $query_projects->num_rows;
 
           ?>
             <tr>
-              <td><?php echo $project['id'];?></td>
-              <td><?php echo $project['title'];?></td>
-              <td><?php echo $project['technologies'];?></td>
-              <td><?php echo $project['link_project'];?></td>
-              <td><?php echo $project['description'];?></td>
-              <td><img height="50" src="../../../<?php echo $project['image'];?>" alt=""></td>
-              <td><?php echo $project['created_at'];?></td>
+              <td><?php echo e($project['id']); ?></td>
+              <td><?php echo e($project['title']); ?></td>
+              <td><?php echo e($project['technologies']); ?></td>
+              <td><?php echo e($project['link_project']); ?></td>
+              <td><?php echo e($project['description']); ?></td>
+              <td><img height="50" src="../../../<?php echo e($project['image']); ?>" alt=""></td>
+              <td><?php echo e($project['created_at']); ?></td>
               <td>
-                <a href="editar_projeto.php?id=<?php echo $project['id'];?>" class="btn small">Editar</a>
-                <a href="deletar_projeto.php?id=<?php echo $project['id'];?>" class="btn small ghost">Excluir</a>
+                <a href="editar_projeto.php?id=<?php echo e($project['id']); ?>" class="btn small">Editar</a>
+                <a href="deletar_projeto.php?id=<?php echo e($project['id']); ?>" class="btn small ghost">Excluir</a>
               </td>
             </tr>
         <?php

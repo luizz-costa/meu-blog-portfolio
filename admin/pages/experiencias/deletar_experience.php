@@ -1,12 +1,17 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 if (isset($_POST['confirm'])) {
 
     require_once('../../../includes/conexao.php');
 
     $id = intval($_GET['id']);
-    $sql_code = "DELETE FROM experience WHERE id = '$id' ";
-    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
+    $stmt = $mysqli->prepare("DELETE FROM experience WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $sql_query = $stmt->execute() or die($stmt->error);
 
     if ($sql_query) { ?>
         <h1>Experiencia deletada!!</h1>

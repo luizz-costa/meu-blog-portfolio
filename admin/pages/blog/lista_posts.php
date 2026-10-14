@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
 
 require_once('../../../includes/conexao.php');
 
@@ -42,17 +46,17 @@ $num_post = $query_post->num_rows;
 
           ?>
             <tr>
-              <td><?php echo $post['id'];?></td>
-              <td><?php echo $post['title'];?></td>
-              <td><?php echo $post['link_post'];?></td>
-              <td><?php echo $post['technologies'];?></td>
-              <td><?php echo $post['short_description'];?></td>
-              <td><?php echo $post['long_description'];?></td>
-              <td><img height="50" src="../../../<?php echo $post['image'];?>" alt=""></td>
-              <td><?php echo $post['created_at'];?></td>
+              <td><?php echo e($post['id']); ?></td>
+              <td><?php echo e($post['title']); ?></td>
+              <td><?php echo e($post['link_post']); ?></td>
+              <td><?php echo e($post['technologies']); ?></td>
+              <td><?php echo e($post['short_description']); ?></td>
+              <td><?php echo e($post['long_description']); ?></td>
+              <td><img height="50" src="../../../<?php echo e($post['image']); ?>" alt=""></td>
+              <td><?php echo e($post['created_at']); ?></td>
               <td>
-                <a href="editar_post.php?id=<?php echo $post['id'];?>" class="btn small">Editar</a>
-                <a href="deletar_post.php?id=<?php echo $post['id'];?>" class="btn small ghost">Excluir</a>
+                <a href="editar_post.php?id=<?php echo e($post['id']); ?>" class="btn small">Editar</a>
+                <a href="deletar_post.php?id=<?php echo e($post['id']); ?>" class="btn small ghost">Excluir</a>
               </td>
             </tr>
         <?php

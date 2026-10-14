@@ -152,7 +152,7 @@ mysql -u USUARIO -p NOME_DO_BANCO < caminho/para/script.sql
 2. Preencha os valores corretos do seu banco de dados:
    - `$host` → endereço do servidor MySQL
    - `$user` → usuário do banco
-   - `$pass` → senha do usuário
+   - `$password` → senha do usuário
    - `$db`   → nome do banco de dados Ex: `portfolio_blog`
 
 3. Os includes ja estão sendo feitos nas paginas com `require_once('includes/conexao.php');`

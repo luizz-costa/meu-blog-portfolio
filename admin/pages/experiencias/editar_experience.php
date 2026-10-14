@@ -1,10 +1,15 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 require_once('../../../includes/conexao.php');
 $id = intval($_GET['id']);
-$sql_experience = "SELECT * FROM experience WHERE id = '$id'";
-$query_experience = $mysqli->query($sql_experience) or die($mysqli->error);
-$experience = $query_experience->fetch_assoc();
+$stmt = $mysqli->prepare("SELECT * FROM experience WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$experience = $stmt->get_result()->fetch_assoc();
 
 if (count($_POST) > 0) {
 
@@ -34,20 +39,16 @@ if (count($_POST) > 0) {
     if ($erro) {
         echo "<p><b>ERROR: $erro</b></p>";
     } else {
-        $sql_code = "UPDATE experience SET 
-        company = '$company', 
-        position = '$position', 
-        link_company = '$link_company', 
-        period = '$period', 
-        locality = '$locality', 
-        description = '$description',
-        long_description = '$long_description'
-        WHERE id = '$id'";
-        $ok = $mysqli->query($sql_code) or die($mysqli->error);
+        $stmt = $mysqli->prepare("UPDATE experience SET
+        company = ?, position = ?, link_company = ?, period = ?, locality = ?, description = ?, long_description = ?
+        WHERE id = ?");
+        $stmt->bind_param("sssssssi", $company, $position, $link_company, $period, $locality, $description, $long_description, $id);
+        $ok = $stmt->execute() or die($stmt->error);
         if ($ok) {
             echo "<p><b>Experiencia Atualizada!!!</b></p>";
             unset($_POST);
             header("Location: lista_experiencias.php");
+            exit;
 
         }
     }

@@ -72,7 +72,7 @@ $tech_loop_reverse = array_reverse($tech_loop);
     <section class=mb-16>
         <div class="max-w-3xl ml-0 p-4 pb-4 border border-border-secondary-light dark:border-border-primary-dark rounded-lg bg-bg-secondary-light dark:bg-bg-secondary-dark shadow-lg relative">
             <div class=text-left>
-                <h1 class="text-4xl font-bold mb-2 text-text-primary-light dark:text-text-primary-dark"><?php echo "$name"; ?></h1>
+                <h1 class="text-4xl font-bold mb-2 text-text-primary-light dark:text-text-primary-dark"><?php echo htmlspecialchars($name); ?></h1>
                 <p class="text-gray-400 mb-3 flex items-center text-xl"><svg class="text-gray-400" width="24" height="24" viewBox="-7 -2 24 24">
                         <path fill="currentcolor" d="M4 9.9A5.002 5.002.0 015 0a5 5 0 011 9.9V19a1 1 0 01-2 0V9.9zM5 8a3 3 0 100-6 3 3 0 000 6z" />
                     </svg> Brasil</p>
@@ -252,7 +252,7 @@ $tech_loop_reverse = array_reverse($tech_loop);
             ?>
                     <div class="group">
                         <p class="text-gray-400 text-sm mb-1"><?= date('Y-m-d', strtotime($post['created_at'])) ?></p>
-                        <a href="<?= $basePath ?>blog/<?php echo $post['link_post']; ?>" class="block group">
+                        <a href="<?= $basePath ?>blog/<?php echo htmlspecialchars($post['link_post']); ?>" class="block group">
                             <h3 class="inline-flex items-center text-xl font-medium text-accent-light dark:text-accent-dark hover:text-text-primary-light dark:hover:text-text-primary-dark transition-colors duration-200 mb-3">
                                 <?= htmlspecialchars($post['title']) ?>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 opacity-70 group-hover:opacity-100 transition-opacity duration-200">

@@ -1,11 +1,17 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 require_once('../../../includes/conexao.php');
 require_once('../../../includes/upload.php');
 
 $id = 1;
-$sql_about = "SELECT * FROM about WHERE id = '$id'";
-$query_about = $mysqli->query($sql_about) or die($mysqli->error);
+$stmt = $mysqli->prepare("SELECT * FROM about WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$query_about = $stmt->get_result();
 
 if ($query_about->num_rows > 0) {
   $about = $query_about->fetch_assoc();
@@ -50,17 +56,13 @@ if ($query_about->num_rows > 0) {
     if ($erro) {
       echo "<p><b>ERROR: $erro</b></p>";
     } else {
-      $sql_code = "UPDATE about SET 
-          name = '$name',
-          short_description = '$short_description',
-          long_description = '$long_description',
-          image = '$image'
-          WHERE id = '$id'";
-
-      $ok = $mysqli->query($sql_code) or die($mysqli->error);
+      $stmt = $mysqli->prepare("UPDATE about SET name = ?, short_description = ?, long_description = ?, image = ? WHERE id = ?");
+      $stmt->bind_param("ssssi", $name, $short_description, $long_description, $image, $id);
+      $ok = $stmt->execute() or die($stmt->error);
       if ($ok) {
         echo "<p><b>Atualizado!!!</b></p>";
         header("Location: editar_sobre.php");
+        exit;
       }
     }
   }
@@ -80,13 +82,13 @@ if ($query_about->num_rows > 0) {
 
 <form enctype="multipart/form-data" class="form-card" method="POST" action="">
   <label>Nome:
-    <input value="<?php echo $about['name'];; ?>" name="name" type="text" placeholder="Nome">
+    <input value="<?php echo e($about['name']); ?>" name="name" type="text" placeholder="Nome">
   </label>
   <label>Descrição curta:
-    <input value="<?php echo $about['short_description']; ?>" name="short_description" type="text" placeholder="Descrição curta">
+    <input value="<?php echo e($about['short_description']); ?>" name="short_description" type="text" placeholder="Descrição curta">
   </label>
   <label>Descrição longa:
-    <textarea rows="6" name="long_description" placeholder="Aqui vai uma descrição longa sobre você."><?php echo $about['long_description']; ?></textarea>
+    <textarea rows="6" name="long_description" placeholder="Aqui vai uma descrição longa sobre você."><?php echo e($about['long_description']); ?></textarea>
   </label>
   <label>Minha foto (opcional)
     <input name="image" type="file">

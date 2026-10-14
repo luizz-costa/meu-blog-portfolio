@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
 
 if(count($_POST) > 0){
     
@@ -29,9 +33,10 @@ if(count($_POST) > 0){
     if($erro){
         echo "<p><b>ERROR: $erro</b></p>";
     }else{
-        $sql_code = "INSERT INTO experience (company, position, link_company, period, locality, description, long_description)
-        VALUES ('$company', '$position', '$link_company', '$period', '$locality', '$description', '$long_description')";
-        $ok = $mysqli->query($sql_code) or die($mysqli->error);
+        $stmt = $mysqli->prepare("INSERT INTO experience (company, position, link_company, period, locality, description, long_description)
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $company, $position, $link_company, $period, $locality, $description, $long_description);
+        $ok = $stmt->execute() or die($stmt->error);
         if($ok){
             echo "<p><b>Experiencia Cadastrada!!!</b></p>";
             unset($_POST);

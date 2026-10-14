@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
 
 if(count($_POST) > 0){
     
@@ -21,9 +25,9 @@ if(count($_POST) > 0){
     if($erro){
         echo "<p><b>ERROR: $erro</b></p>";
     }else{
-        $sql_code = "INSERT INTO contact (email, github, linkedin)
-        VALUES ('$email', '$github', '$linkedin')";
-        $ok = $mysqli->query($sql_code) or die($mysqli->error);
+        $stmt = $mysqli->prepare("INSERT INTO contact (email, github, linkedin) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $email, $github, $linkedin);
+        $ok = $stmt->execute() or die($stmt->error);
         if($ok){
             echo "<p><b>Contato Cadastrado!!!</b></p>";
             unset($_POST);
@@ -45,13 +49,13 @@ if(count($_POST) > 0){
     <a href="editar_contato.php">Voltar para o Editar</a>
     <form class="form-card" method="POST" action="">
       <label>E-mail
-        <input value="<?php if(isset($_POST['email'])) echo $_POST['email']; ?>" name="email" type="text" placeholder="Email">
+        <input value="<?php if(isset($_POST['email'])) echo e($_POST['email']); ?>" name="email" type="text" placeholder="Email">
       </label>
       <label>GitHub
-        <input value="<?php if(isset($_POST['github'])) echo $_POST['github']; ?>" name="github" type="text" placeholder="Github">
+        <input value="<?php if(isset($_POST['github'])) echo e($_POST['github']); ?>" name="github" type="text" placeholder="Github">
       </label>
       <label>Linkedin
-        <input value="<?php if(isset($_POST['linkedin'])) echo $_POST['linkedin']; ?>" name="linkedin" type="text" placeholder="Linkedin">
+        <input value="<?php if(isset($_POST['linkedin'])) echo e($_POST['linkedin']); ?>" name="linkedin" type="text" placeholder="Linkedin">
       </label>
       <button type="submit" class="btn">Salvar</button>
     </form>

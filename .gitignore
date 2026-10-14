@@ -1,3 +1,6 @@
 # Arquivos sens√≠veis
 includes/conexao.php
 .env
+
+# Imagens enviadas pelo painel (uploads): ficam no servidor, n„o no Git
+assets/images/*

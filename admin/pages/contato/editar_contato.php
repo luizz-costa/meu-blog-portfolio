@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
 
 require_once('../../../includes/conexao.php');
 $id = 1;
@@ -22,22 +26,23 @@ if(count($_POST) > 0){
     if($erro){
         echo "<p><b>ERROR: $erro</b></p>";
     }else{
-      $sql_code = "UPDATE contact SET email = '$email',
-      github = '$github',
-      linkedin = '$linkedin'
-      WHERE id = '$id'";
-      $ok = $mysqli->query($sql_code) or die($mysqli->error);
+      $stmt = $mysqli->prepare("UPDATE contact SET email = ?, github = ?, linkedin = ? WHERE id = ?");
+      $stmt->bind_param("sssi", $email, $github, $linkedin, $id);
+      $ok = $stmt->execute() or die($stmt->error);
       if($ok){
           echo "<p><b>Contato Atualizado!!!</b></p>";
           header("Location: editar_contato.php");
+          exit;
 
       }
     }
 }
 
 
-$sql_contact = "SELECT * FROM contact WHERE id = '$id'";
-$query_contact = $mysqli->query($sql_contact) or die($mysqli->error);
+$stmt = $mysqli->prepare("SELECT * FROM contact WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$query_contact = $stmt->get_result();
 
 if($query_contact->num_rows > 0){
     $contact = $query_contact->fetch_assoc();
@@ -55,13 +60,13 @@ if($query_contact->num_rows > 0){
 
     <form class="form-card" method="POST" enctype="multipart/form-data" action="">
       <label>E-mail
-        <input value="<?php echo $contact['email'];; ?>" name="email" type="text" placeholder="E-mail">
+        <input value="<?php echo e($contact['email']); ?>" name="email" type="text" placeholder="E-mail">
       </label>
       <label>Github
-        <input value="<?php  echo $contact['github']; ?>" name="github" type="text" placeholder="GitHub">
+        <input value="<?php echo e($contact['github']); ?>" name="github" type="text" placeholder="GitHub">
       </label>
       <label>Linkedin
-        <input value="<?php  echo $contact['linkedin']; ?>" name="linkedin" type="text" placeholder="Linkedin">
+        <input value="<?php echo e($contact['linkedin']); ?>" name="linkedin" type="text" placeholder="Linkedin">
       </label>
       <button type="submit" class="btn">Salvar</button>
     </form>

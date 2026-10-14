@@ -1,6 +1,6 @@
 # Ativar reescrita de URL
 RewriteEngine On
-RewriteBase /
+# Sem RewriteBase fixo: as regras funcionam na raiz do domínio e numa subpasta do XAMPP
 
 # Redirecionar URLs do tipo /blog/slug-do-post
 RewriteRule ^blog/([^/]+)/?$ blog_post/post.php?slug=$1 [L,QSA]
@@ -10,7 +10,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
 
-# Redirecionar /pagina.php para /pagina (SEO-friendly)
+# Redirecionar /pagina.php para /pagina (SEO-friendly), só nas páginas públicas.
+# O painel fica de fora: o redirecionamento quebraria os formulários (POST vira GET)
+RewriteCond %{REQUEST_URI} !/admin/
 RewriteCond %{THE_REQUEST} \s/([^.]+)\.php [NC]
 RewriteRule ^ /%1 [R=301,L]
 

@@ -20,12 +20,12 @@ if (isset($_GET['slug'])) {
 
         <div class="w-full md:w-3/4 lg:w-1/2 mx-auto px-4 py-12">
             <h1 class="text-5xl font-bold mb-4 text-text-primary-light dark:text-text-primary-dark">
-                <?php echo $post['title']; ?>
+                <?php echo htmlspecialchars($post['title']); ?>
             </h1>
             <div class="flex flex-wrap gap-2">
                 <?php foreach ($tags as $tag) : ?>
                     <span class="px-2 py-1 text-xs bg-bg-primary-light dark:bg-bg-tertiary-dark text-text-secondary-light dark:text-text-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-md transition-all duration-300">
-                        <?php echo trim($tag); ?>
+                        <?php echo htmlspecialchars(trim($tag)); ?>
                     </span>
                 <?php endforeach; ?>
             </div>
@@ -33,15 +33,15 @@ if (isset($_GET['slug'])) {
                 <?php echo date('Y-m-d', strtotime($post['created_at'])); ?>
             </p>
             <div class="prose mb-6 text-text-primary-light dark:text-text-primary-dark">
-                <?php echo nl2br($post['short_description']); ?>
+                <?php echo nl2br(htmlspecialchars($post['short_description'])); ?>
             </div>
             <!-- diminuir o tamanho da imagem PRECISA FAZER -->
             <?php if (!empty($post['image'])): ?>
-                <img src="<?= $basePath ?><?php echo $post['image']; ?>" alt="<?php echo $post['title']; ?>" class="mb-6 w-full max-h-80 object-cover rounded-lg">
+                <img src="<?= $basePath ?><?php echo htmlspecialchars($post['image']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>" class="mb-6 w-full max-h-80 object-cover rounded-lg">
             <?php endif; ?>
 
             <div class="prose mb-6 text-text-primary-light dark:text-text-primary-dark">
-                <?php echo nl2br($post['long_description']); ?>
+                <?php echo nl2br(htmlspecialchars($post['long_description'])); ?>
             </div>
 
         </div>

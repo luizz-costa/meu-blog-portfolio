@@ -1,12 +1,17 @@
 <?php
 
+// Só usuário logado passa daqui (antes de qualquer leitura ou gravação no banco)
+require_once __DIR__ . '/../../includes/auth.php';
+
+
 require_once('../../../includes/conexao.php');
 require_once('../../../includes/upload.php');
 
 $id = intval($_GET['id']);
-$sql_post = "SELECT * FROM blog WHERE id = '$id'";
-$query_post = $mysqli->query($sql_post) or die($mysqli->error);
-$post = $query_post->fetch_assoc();
+$stmt = $mysqli->prepare("SELECT * FROM blog WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$post = $stmt->get_result()->fetch_assoc();
 
 if (count($_POST) > 0) {
 
@@ -54,21 +59,17 @@ if (count($_POST) > 0) {
   if ($erro) {
     echo "<p><b>ERROR: $erro</b></p>";
   } else {
-    $sql_code = "UPDATE blog SET
-        title = '$title', 
-        link_post = '$link_post', 
-        technologies = '$technologies', 
-        short_description = '$short_description', 
-        long_description = '$long_description', 
-        image = '$image'
-        WHERE id = '$id'";
-
-    $ok = $mysqli->query($sql_code) or die($mysqli->error);
+    $stmt = $mysqli->prepare("UPDATE blog SET
+        title = ?, link_post = ?, technologies = ?, short_description = ?, long_description = ?, image = ?
+        WHERE id = ?");
+    $stmt->bind_param("ssssssi", $title, $link_post, $technologies, $short_description, $long_description, $image, $id);
+    $ok = $stmt->execute() or die($stmt->error);
 
     if ($ok) {
       echo "<p><b>Post Atualizado!!!</b></p>";
       unset($_POST);
       header("Location: lista_posts.php");
+      exit;
 
     }
   }
@@ -87,19 +88,19 @@ if (count($_POST) > 0) {
 
     <form enctype="multipart/form-data" class="form-card" method="POST" action="">
       <label>Titulo:
-        <input value="<?php echo $post['title']; ?>" name="title" type="text" placeholder="Ex: Pare de criptografar senhas com md5">
+        <input value="<?php echo e($post['title']); ?>" name="title" type="text" placeholder="Ex: Pare de criptografar senhas com md5">
       </label>
       <label>Link ou nome da url:
-        <input value="<?php echo $post['link_post']; ?>" name="link_post" type="text" placeholder="Ex: nao-use-metodo-md5">
+        <input value="<?php echo e($post['link_post']); ?>" name="link_post" type="text" placeholder="Ex: nao-use-metodo-md5">
       </label>
       <label>Tecnologias usadas:
-        <input value="<?php echo $post['technologies']; ?>" name="technologies" type="text" placeholder="Ex: Seguranca, Criptografia, md5..">
+        <input value="<?php echo e($post['technologies']); ?>" name="technologies" type="text" placeholder="Ex: Seguranca, Criptografia, md5..">
       </label>
       <label>Descrição curta:
-        <input value="<?php echo $post['short_description']; ?>" name="short_description" type="text" placeholder="Ex: O metodo md5 passou a ser um metodo pessimo para criptografar senhas.....">
+        <input value="<?php echo e($post['short_description']); ?>" name="short_description" type="text" placeholder="Ex: O metodo md5 passou a ser um metodo pessimo para criptografar senhas.....">
       </label>
       <label>Descrição longa(conteudo):
-        <textarea rows="6" name="long_description" placeholder="Ex: Diversos hackers descriptografaram essas senhas e cadastraram em banco de dados....."><?php echo $post['long_description']; ?></textarea>
+        <textarea rows="6" name="long_description" placeholder="Ex: Diversos hackers descriptografaram essas senhas e cadastraram em banco de dados....."><?php echo e($post['long_description']); ?></textarea>
       </label>
       <label>Imagem
         <input name="image" type="file">

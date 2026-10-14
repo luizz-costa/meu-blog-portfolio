@@ -1,4 +1,4 @@
-<?php $basePath = '/'; ?>
+<?php require_once __DIR__ . '/caminhos.php'; $basePath = BASE_URL; ?>
 
 <!doctype html>
 <html lang="pt-BR">
@@ -11,7 +11,7 @@
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="<?= $basePath ?>favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="<?= $basePath ?>favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/meu-blog-portfolio/favicon.ico" />
+    <link rel="shortcut icon" href="<?= $basePath ?>favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="<?= $basePath ?>favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Luiz F. Costa" />
     <link rel="manifest" href="<?= $basePath ?>favicon/site.webmanifest" />
